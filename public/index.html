@@ -118,6 +118,53 @@
         <button id="delete-course-btn">Delete</button>
         <div id="delete-course-message"></div>
     </section>
+
+    <!-- ================= LESSONS ================= -->
+    <section id="lessons-section">
+        <h2>Lessons API Test</h2>
+        <!-- Создание урока -->
+        <form id="create-lesson-form">
+            <h3>Create Lesson</h3>
+            <label>Course ID: <input type="text" id="lesson-course-id" required></label><br>
+            <label>Title: <input type="text" id="lesson-title" required></label><br>
+            <label>Content: <input type="text" id="lesson-content"></label><br>
+            <label>Video URL: <input type="text" id="lesson-video"></label><br>
+            <label>Order: <input type="number" id="lesson-order"></label><br>
+            <button type="submit">Create Lesson</button>
+        </form>
+        <div id="create-lesson-message"></div>
+    </section>
+
+    <!-- ================= ENROLLMENT ================= -->
+    <section id="enrollment-section">
+        <h2>Enrollment API Test</h2>
+        <!-- Запись на курс -->
+        <label>Enroll Course ID: <input type="text" id="enroll-course-id"></label>
+        <button id="enroll-btn">Enroll</button>
+        <div id="enroll-message"></div>
+        <br><br>
+        <!-- Получить прогресс -->
+        <label>Enrollment ID: <input type="text" id="progress-enroll-id"></label>
+        <button id="get-progress-btn">Get Progress</button>
+        <pre id="progress-result"></pre>
+        <br><br>
+        <!-- Отмена урока -->
+        <label>Enrollment ID: <input type="text" id="cancel-enroll-id"></label>
+        <label>Lesson ID: <input type="text" id="cancel-lesson-id"></label>
+        <button id="cancel-lesson-btn">Cancel Lesson</button>
+        <div id="cancel-lesson-message"></div>
+        <br><br>
+        <!-- Подсчет студентов -->
+        <label>Course ID: <input type="text" id="count-course-id"></label>
+        <button id="count-students-btn">Count Students</button>
+        <div id="count-students-result"></div>
+
+        <br><br>
+        <label>Enrollment ID: <input type="text" id="complete-enroll-id"></label>
+        <label>Lesson ID: <input type="text" id="complete-lesson-id"></label>
+        <button id="complete-lesson-btn">Complete Lesson</button>
+        <div id="complete-lesson-message"></div>
+    </section>
 </main>
 </body>
 </html>

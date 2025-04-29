@@ -1,4 +1,6 @@
 // src/utils/consts.ts
+import {createEnrollment} from "../controllers/enrollment.controller";
+
 export const API_PREFIX = '/api/lab2/';
 
 // Сообщения для фронта
@@ -34,5 +36,8 @@ export enum ErrorMessages {
     CommentNotValidLessonUser = 'Нету такого урока или пользователя',
     CommentNotValidID = 'Некорректный ID комментария',
     CommentDeleteSuccessful = 'Некорректный ID комментария',
+    // Запись на курс
+    EnrollmentAlreadyEnrolled = 'Вы уже записаны на курс',
+    EnrollmentUnenrolledSuccessfully = 'Запись на курс отменена',
 }
 

@@ -5,6 +5,156 @@ let userId = '';
 
 const API_PREFIX = '/api/lab2/'
 
+const completeBtn = document.getElementById('complete-lesson-btn');
+const completeMsg = document.getElementById('complete-lesson-message');
+
+completeBtn.addEventListener('click', async () => {
+    if (!token) return alert('Login first');
+    const enrollId = document.getElementById('complete-enroll-id').value.trim();
+    const lessonId = document.getElementById('complete-lesson-id').value.trim();
+    if (!enrollId || !lessonId) return;
+    try {
+        const res = await fetch(
+            apiBaseUrl + API_PREFIX + `enrollments/${enrollId}/complete/${lessonId}`,
+            {method: 'PATCH', headers: authHeader()}
+        );
+        const data = await res.json();
+        completeMsg.textContent = res.ok
+            ? `✅ Lesson done, progress ${data.progress}%`
+            : 'Error: ' + data.message;
+        completeMsg.className = res.ok ? 'message' : 'error';
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+/* ======= Lessons ======= */
+const createLessonForm = document.getElementById('create-lesson-form');
+const createLessonMsg = document.getElementById('create-lesson-message');
+
+createLessonForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!token) return alert('Login first');
+    const courseId = document.getElementById('lesson-course-id').value.trim();
+    const title = document.getElementById('lesson-title').value.trim();
+    const content = document.getElementById('lesson-content').value.trim();
+    const videoUrl = document.getElementById('lesson-video').value.trim();
+    const order = document.getElementById('lesson-order').value;
+
+    const body = {course: courseId, title, content, videoUrl, order: order ? Number(order) : undefined};
+    try {
+        const res = await fetch(apiBaseUrl + API_PREFIX + 'lessons', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...authHeader()
+            },
+            body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        createLessonMsg.textContent = res.ok
+            ? 'Lesson created: ' + JSON.stringify(data)
+            : 'Error: ' + data.message;
+        createLessonMsg.className = res.ok ? 'message' : 'error';
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+/* ======= Enrollment ======= */
+const enrollBtn = document.getElementById('enroll-btn');
+const enrollMsg = document.getElementById('enroll-message');
+
+enrollBtn.addEventListener('click', async () => {
+    if (!token) return alert('Login first');
+    const courseId = document.getElementById('enroll-course-id').value.trim();
+    if (!courseId) return;
+    try {
+        const res = await fetch(apiBaseUrl + API_PREFIX + 'enrollments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...authHeader()
+            },
+            body: JSON.stringify({courseId})
+        });
+        const data = await res.json();
+        enrollMsg.textContent = res.ok
+            ? 'Enrolled: ' + JSON.stringify(data)
+            : 'Error: ' + data.message;
+        enrollMsg.className = res.ok ? 'message' : 'error';
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+/* ======= Get Progress ======= */
+const getProgressBtn = document.getElementById('get-progress-btn');
+const progressResult = document.getElementById('progress-result');
+
+getProgressBtn.addEventListener('click', async () => {
+    const id = document.getElementById('progress-enroll-id').value.trim();
+    if (!id) return;
+    try {
+        const res = await fetch(apiBaseUrl + API_PREFIX + 'enrollments/' + id + '/complete/' + '');
+        // на самом деле у тебя endpoint /enrollments/:id/progress (или GET /:id)
+        // допустим мы читаем прогресс через GET /enrollments/:id
+        const resp = await fetch(apiBaseUrl + API_PREFIX + 'enrollments/' + id);
+        const data = await resp.json();
+        progressResult.textContent = resp.ok
+            ? `Progress: ${data.progress}%`
+            : 'Error: ' + data.message;
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+/* ======= Cancel Lesson ======= */
+const cancelBtn = document.getElementById('cancel-lesson-btn');
+const cancelMsg = document.getElementById('cancel-lesson-message');
+
+cancelBtn.addEventListener('click', async () => {
+    if (!token) return alert('Login first');
+    const enrollId = document.getElementById('cancel-enroll-id').value.trim();
+    const lessonId = document.getElementById('cancel-lesson-id').value.trim();
+    if (!enrollId || !lessonId) return;
+    try {
+        const res = await fetch(apiBaseUrl + API_PREFIX + `enrollments/${enrollId}/cancel/${lessonId}`, {
+            method: 'PATCH',
+            headers: authHeader()
+        });
+        const data = await res.json();
+        cancelMsg.textContent = res.ok
+            ? 'Lesson canceled: ' + JSON.stringify(data)
+            : 'Error: ' + data.message;
+        cancelMsg.className = res.ok ? 'message' : 'error';
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+/* ======= Count Students ======= */
+const countBtn = document.getElementById('count-students-btn');
+const countRes = document.getElementById('count-students-result');
+
+countBtn.addEventListener('click', async () => {
+    if (!token) return alert('Login first');
+    const courseId = document.getElementById('count-course-id').value.trim();
+    if (!courseId) return;
+    try {
+        const res = await fetch(apiBaseUrl + API_PREFIX + `enrollments/course/${courseId}/count`, {
+            method: 'GET',
+            headers: authHeader()
+        });
+        const data = await res.json();
+        countRes.textContent = res.ok
+            ? `Students count: ${data.count}`
+            : 'Error: ' + data.message;
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 const registrationForm = document.querySelector('.registration-form');
 const loginForm = document.querySelector('.login-form');
 const getProfile = document.querySelector('.get-profile');
@@ -218,7 +368,7 @@ updateForm.addEventListener('submit', async (e) => {
                 'Content-Type': 'application/json',
                 ...authHeader()
             },
-            body: JSON.stringify({ title })
+            body: JSON.stringify({title})
         });
         const data = await res.json();
         updateMsg.textContent = res.ok ? 'Updated: ' + JSON.stringify(data) : 'Error: ' + data.message;

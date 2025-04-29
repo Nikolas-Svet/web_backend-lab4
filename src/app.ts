@@ -9,6 +9,7 @@ import courseRoutes from "./routes/course.routes";
 import cors from 'cors';
 import lessonRoutes from "./routes/lesson.routes";
 import commentRoutes from "./routes/comment.routes";
+import enrollmentRoutes from './routes/enrollment.routes';
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use(`${API_PREFIX}user`, userRoutes);
 app.use(`${API_PREFIX}courses`,  courseRoutes);
 app.use(`${API_PREFIX}lessons`, lessonRoutes);
 app.use(`${API_PREFIX}comment`, commentRoutes);
+app.use(`${API_PREFIX}enrollments`, enrollmentRoutes);
 
 export default app;
