@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./index.js" defer></script>
+    <title>API Test</title>
+</head>
+<body>
+<main>
+    <h1>Тестирование API</h1>
+
+    <!-- Регистрация -->
+    <section>
+        <h2>Регистрация</h2>
+        <form class="registration-form">
+            <label for="reg-firstName">Имя:</label>
+            <input type="text" class="reg-firstName" id="reg-firstName" name="firstName" required/>
+
+            <label for="reg-lastName">Фамилия:</label>
+            <input type="text" class="reg-lastName" id="reg-lastName" name="lastName" required/>
+
+            <label for="reg-username">Логин:</label>
+            <input type="text" class="reg-username" id="reg-username" name="username" required/>
+
+            <label for="reg-password">Пароль:</label>
+            <input type="password" class="reg-password" id="reg-password" name="password" required/>
+
+            <label for="reg-role">Роль:</label>
+            <select class="reg-role" id="reg-role" name="role">
+                <option value="student">Студент</option>
+                <option value="teacher">Преподаватель</option>
+            </select>
+
+            <button type="submit">Зарегистрироваться</button>
+        </form>
+        <div class="registration-message"></div>
+    </section>
+
+    <!-- Авторизация -->
+    <section>
+        <h2>Вход</h2>
+        <form class="login-form">
+            <label for="login-username">Логин:</label>
+            <input type="text" id="login-username" class="login-username" name="username" required/>
+
+            <label for="login-password">Пароль:</label>
+            <input type="password" id="login-password" class="login-password" name="password" required/>
+
+            <button type="submit">Войти</button>
+        </form>
+        <div class="login-message"></div>
+    </section>
+
+    <!-- Получение данных профиля -->
+    <section>
+        <h2>Профиль</h2>
+        <button class="get-profile">Получить данные о себе</button>
+        <pre class="profile-result"></pre>
+    </section>
+
+    <!-- Удаление аккаунта -->
+    <section class="delete-section">
+        <h2>Удаление учётной записи</h2>
+        <button class="delete-account">Удалить аккаунт</button>
+        <div class="delete-message"></div>
+    </section>
+
+    <!-- Раздел для тестирования Courses API -->
+    <section id="courses-section">
+        <h2>Courses API Test</h2>
+
+        <!-- Создание курса -->
+        <form id="create-course-form" enctype="multipart/form-data">
+            <h3>Create Course</h3>
+            <label>Title: <input type="text" id="course-title" required></label><br>
+            <label>Description: <input type="text" id="course-description"></label><br>
+            <label>Price: <input type="number" id="course-price" required></label><br>
+            <label>Category: <input type="text" id="course-category" required></label><br>
+            <label>Level:
+                <select id="course-level">
+                    <option value="beginner">beginner</option>
+                    <option value="intermediate">intermediate</option>
+                    <option value="advanced">advanced</option>
+                </select>
+            </label><br>
+            <label>Published: <input type="checkbox" id="course-published"></label><br>
+            <label>Tags (comma): <input type="text" id="course-tags"></label><br>
+            <label>Image: <input type="file" id="course-image" accept="image/*" required></label><br>
+            <button type="submit">Create</button>
+        </form>
+        <div id="create-course-message"></div>
+
+        <!-- Получить все курсы -->
+        <h3>Get All Courses</h3>
+        <button id="list-courses-btn">Get All</button>
+        <pre id="courses-list"></pre>
+
+        <!-- Получить курс по ID -->
+        <h3>Get Course by ID</h3>
+        <input type="text" id="get-course-id" placeholder="Course ID">
+        <button id="get-course-btn">Get</button>
+        <pre id="course-detail"></pre>
+
+        <!-- Обновить курс -->
+        <h3>Update Course</h3>
+        <form id="update-course-form">
+            <label>Course ID: <input type="text" id="update-course-id" required></label><br>
+            <label>New Title: <input type="text" id="update-course-title"></label><br>
+            <button type="submit">Update</button>
+        </form>
+        <div id="update-course-message"></div>
+
+        <!-- Удалить курс -->
+        <h3>Delete Course</h3>
+        <input type="text" id="delete-course-id" placeholder="Course ID">
+        <button id="delete-course-btn">Delete</button>
+        <div id="delete-course-message"></div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+}
+h1, h2 {
+    color: #333;
+}
+section {
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+label {
+    font-weight: bold;
+}
+input, select, button {
+    padding: 8px;
+    font-size: 1em;
+}
+button {
+    width: 180px;
+    cursor: pointer;
+}
+.message {
+    color: green;
+    margin-top: 10px;
+}
+.error {
+    color: red;
+    margin-top: 10px;
+}
+pre {
+    background: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    max-width: 500px;
+    overflow-x: auto;
+}
