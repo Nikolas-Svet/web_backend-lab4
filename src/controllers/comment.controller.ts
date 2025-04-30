@@ -24,7 +24,7 @@ export const createComment = async (req: Request, res: Response) => {
     }
 }
 
-export const getComments = async (req: Request, res: Response): Promise<void> => {
+export const getComments = async (req: Request, res: Response) => {
     try {
         const comments = await Comment.find()
             .sort({ createdAt: -1 })
@@ -37,7 +37,7 @@ export const getComments = async (req: Request, res: Response): Promise<void> =>
     }
 };
 
-export const getCommentById = async (req: Request, res: Response): Promise<void> => {
+export const getCommentById = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(400).json({ message: ErrorMessages.CommentNotValidID });
@@ -58,7 +58,7 @@ export const getCommentById = async (req: Request, res: Response): Promise<void>
     }
 };
 
-export const updateCommentById = async (req: Request, res: Response): Promise<void> => {
+export const updateCommentById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { text } = req.body;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -88,7 +88,7 @@ export const updateCommentById = async (req: Request, res: Response): Promise<vo
     }
 };
 
-export const deleteCommentById = async (req: Request, res: Response): Promise<void> => {
+export const deleteCommentById = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(400).json({ message: ErrorMessages.ValidationId });

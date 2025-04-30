@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import Lesson from '../models/lesson.model';
 import { ErrorMessages } from '../utils/consts';
 
-export const createLesson = async (req: Request, res: Response): Promise<void> => {
+export const createLesson = async (req: Request, res: Response) => {
     try {
         const { title, content, videoUrl, course, order } = req.body;
         if (!title || !course) {
@@ -24,7 +24,7 @@ export const createLesson = async (req: Request, res: Response): Promise<void> =
     }
 };
 
-export const getLessons = async (req: Request, res: Response): Promise<void> => {
+export const getLessons = async (req: Request, res: Response) => {
     try {
         const lessons = await Lesson.find().sort({ order: 1, createdAt: -1 });
         res.json(lessons);
@@ -34,7 +34,7 @@ export const getLessons = async (req: Request, res: Response): Promise<void> => 
     }
 };
 
-export const getLessonById = async (req: Request, res: Response): Promise<void> => {
+export const getLessonById = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(400).json({ message: ErrorMessages.LessonNotValidID });
@@ -53,7 +53,7 @@ export const getLessonById = async (req: Request, res: Response): Promise<void> 
     }
 };
 
-export const updateLessonById = async (req: Request, res: Response): Promise<void> => {
+export const updateLessonById = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(400).json({ message: ErrorMessages.LessonNotValidID });
@@ -77,7 +77,7 @@ export const updateLessonById = async (req: Request, res: Response): Promise<voi
     }
 };
 
-export const deleteLessonById = async (req: Request, res: Response): Promise<void> => {
+export const deleteLessonById = async (req: Request, res: Response) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
         res.status(400).json({ message: ErrorMessages.LessonNotValidID });

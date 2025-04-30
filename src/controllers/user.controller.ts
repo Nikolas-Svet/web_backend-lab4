@@ -8,7 +8,7 @@ import {processImage} from "../utils/image.utils";
 export const updateUserPhoto = async (
     req: AuthRequest & { file?: Express.Multer.File },
     res: Response,
-): Promise<void> => {
+) => {
   try {
     const userId = req.user?.userId;
     if (!userId) {

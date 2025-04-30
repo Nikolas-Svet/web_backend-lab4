@@ -7,7 +7,7 @@ import slugify from 'slugify';
 import {processImage} from "../utils/image.utils";
 import {IRequestWithFile} from "../types/course.types";
 
-export const getCategories = async (req: Request, res: Response): Promise<void> => {
+export const getCategories = async (req: Request, res: Response) => {
     try {
         const categories: string[] = await Course.distinct('category');
         res.json({ categories });
