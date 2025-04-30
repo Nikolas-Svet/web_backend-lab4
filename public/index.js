@@ -3,7 +3,7 @@ const apiBaseUrl = '';
 let token = '';
 let userId = '';
 
-const API_PREFIX = '/api/lab2/'
+const API_PREFIX = '/api/lab4/'
 
 const completeBtn = document.getElementById('complete-lesson-btn');
 const completeMsg = document.getElementById('complete-lesson-message');
